@@ -1,33 +1,60 @@
-import React from 'react';
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import Link from '@material-ui/core/Link';
-import ProTip from './ProTip';
+import React, { useEffect, useState } from 'react';
+import { Auth, Hub } from 'aws-amplify';
+// import Login from './Login';
+import Portal from './Portal';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
+
+function App() {
+  const [user, setUser] = useState<any>(null);
+  function getUser() {
+    return Auth.currentAuthenticatedUser()
+      .then(userData => userData)
+      .catch(() => console.log('Not signed in'));
+  }
+  useEffect(() => {
+    Hub.listen('auth', ({ payload: { event, data } }) => {
+      switch (event) {
+        case 'signIn':
+        case 'cognitoHostedUI':
+          getUser().then(userData => setUser(userData));
+          break;
+        case 'signOut':
+          setUser(null);
+          break;
+        case 'signIn_failure':
+        case 'cognitoHostedUI_failure':
+          console.log('Sign in failure', data);
+          break;
+      }
+    });
+
+    getUser().then(userData => setUser(userData));
+  }, []);
+
+
+  // if (user)
+    return <Portal />
+  // else
+  //   return <Login />
+  // return (    
+  //     <p>User: {user ? JSON.stringify(user.attributes) : 'None'}</p>
+  //     {user ? (
+  //       <button onClick={() => Auth.signOut()}>Sign Out</button>
+  //     ) : (
+  //       <Login/>
+  //   <Button 
+  //   variant="contained"
+  //   color="primary"
+  //   className={classes.button}
+  //   startIcon={<FacebookIcon />}
+  //   onClick={() => {
+  //     //@ts-ignore
+  //     Auth.federatedSignIn({ provider: 'Facebook' })
+  //   }}>
+  //     Facebook Login
+  //   </Button>
+  // )}    
+  // );
 }
 
-export default function App() {
-  return (
-    <Container maxWidth="sm">
-      <Box my={4}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          Create React App v4-beta example with TypeScript
-        </Typography>
-        <ProTip />
-        <Copyright />
-      </Box>
-    </Container>
-  );
-}
+export default App;

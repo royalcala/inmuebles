@@ -1,0 +1,20 @@
+{
+  "main": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-inmuebles-main-184635-authRole",
+      "UnauthRoleArn": "arn:aws:iam::421220596947:role/amplify-inmuebles-main-184635-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::421220596947:role/amplify-inmuebles-main-184635-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-inmuebles-main-184635-deployment",
+      "UnauthRoleName": "amplify-inmuebles-main-184635-unauthRole",
+      "StackName": "amplify-inmuebles-main-184635",
+      "StackId": "arn:aws:cloudformation:us-west-2:421220596947:stack/amplify-inmuebles-main-184635/43ec6fb0-0ce7-11ec-bac5-0a3e39d048e5",
+      "AmplifyAppId": "d3gowm290bncru"
+    },
+    "categories": {
+      "auth": {
+        "inmuebles62b1c8bb": {}
+      }
+    }
+  }
+}
