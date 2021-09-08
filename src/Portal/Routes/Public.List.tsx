@@ -1,9 +1,9 @@
 import React from 'react'
-import Container from './Container'
+import withContainer from './withContainer'
 function PublicList() {
     return (
         <div>Hi</div>
     )
 }
 
-export default Container(PublicList,["Public","List"]) as any
+export default withContainer(PublicList,["Public","List"]) as any

@@ -10,7 +10,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import MenuSession from './MenuSession'
-import MenuMobil from "./MenuMobil";
+import MenuMobil from "./MenuMobilRight";
 import MenuDrawerLeft from "./MenuDrawerLeft";
 import Routes from './Routes'
 
