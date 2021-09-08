@@ -13,13 +13,13 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import StarBorder from '@mui/icons-material/StarBorder';
 import Drawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
+import MenuPublic from './MenuDrawerLeft.Public'
+
+
+
 
 export default function MenuDrawerLeft({ drawer, setDrawer }: { drawer: boolean, setDrawer: Function }) {
-  const [open, setOpen] = React.useState(false);
 
-  const handleClick = () => {
-    setOpen(!open);
-  };
   const toggleDrawer = (open: boolean) =>
     (event: React.KeyboardEvent | React.MouseEvent) => {
       if (
@@ -49,41 +49,19 @@ export default function MenuDrawerLeft({ drawer, setDrawer }: { drawer: boolean,
           sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
           component="nav"
           aria-labelledby="nested-list-subheader"
-          // subheader={
-          //   <ListSubheader component="div" id="nested-list-subheader">
-          //     Nested List Items
-          //   </ListSubheader>
-          // }
+        // subheader={
+        //   <ListSubheader component="div" id="nested-list-subheader">
+        //     Nested List Items
+        //   </ListSubheader>
+        // }
         >
-          <ListItemButton>
+          {/* <ListItemButton>
             <ListItemIcon>
               <SendIcon />
             </ListItemIcon>
             <ListItemText primary="Sent mail" />
-          </ListItemButton>
-          <ListItemButton>
-            <ListItemIcon>
-              <DraftsIcon />
-            </ListItemIcon>
-            <ListItemText primary="Drafts" />
-          </ListItemButton>
-          <ListItemButton onClick={handleClick}>
-            <ListItemIcon>
-              <InboxIcon />
-            </ListItemIcon>
-            <ListItemText primary="Inbox" />
-            {open ? <ExpandLess /> : <ExpandMore />}
-          </ListItemButton>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemIcon>
-                  <StarBorder />
-                </ListItemIcon>
-                <ListItemText primary="Starred" />
-              </ListItemButton>
-            </List>
-          </Collapse>
+          </ListItemButton> */}
+          <MenuPublic/>         
         </List>
       </Box>
     </Drawer>

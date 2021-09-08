@@ -12,6 +12,7 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import MenuSession from './MenuSession'
 import MenuMobil from "./MenuMobil";
 import MenuDrawerLeft from "./MenuDrawerLeft";
+import Routes from './Routes'
 
 export default function Portal() {
   const [drawer, setDrawer] = React.useState(false);
@@ -96,6 +97,7 @@ export default function Portal() {
         drawer={drawer}
         setDrawer={setDrawer}
       />
+      <Routes />
     </Box>
   );
 }
