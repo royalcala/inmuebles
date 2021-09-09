@@ -6,34 +6,12 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import FacebookIcon from '@mui/icons-material/Facebook';
+import { GlobalContext } from '../App';
 
 
 export default function MenuSession() {
-    const [user, setUser] = useState<any>(null);
-    function getUser() {
-        return Auth.currentAuthenticatedUser()
-            .then(userData => userData)
-            .catch(() => console.log('Not signed in'));
-    }
-    useEffect(() => {
-        Hub.listen('auth', ({ payload: { event, data } }) => {
-            switch (event) {
-                case 'signIn':
-                case 'cognitoHostedUI':
-                    getUser().then(userData => setUser(userData));
-                    break;
-                case 'signOut':
-                    setUser(null);
-                    break;
-                case 'signIn_failure':
-                case 'cognitoHostedUI_failure':
-                    console.log('Sign in failure', data);
-                    break;
-            }
-        });
-
-        getUser().then(userData => setUser(userData));
-    }, []);
+    const globalContext = React.useContext(GlobalContext)
+    console.log(globalContext.user)
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -45,7 +23,7 @@ export default function MenuSession() {
     };
 
     const menuId = 'primary-search-account-menu';
-    if (user)
+    if (globalContext.user)
         return (
             <>
                 <IconButton
@@ -75,9 +53,9 @@ export default function MenuSession() {
                     onClose={handleMenuClose}
                 >
                     <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-                    <MenuItem onClick={async ()=>{
-                         await Auth.signOut();
-                         handleMenuClose()
+                    <MenuItem onClick={async () => {
+                        await Auth.signOut();
+                        handleMenuClose()
                     }}>Cerrar Sesion</MenuItem>
                 </Menu>
             </>
@@ -85,15 +63,15 @@ export default function MenuSession() {
     else
         return (
             <Button
-            color="inherit"
-            //  className={classes.buttonLogin}
-            startIcon={<FacebookIcon />}
-            onClick={() => {
-                //@ts-ignore
-                Auth.federatedSignIn({ provider: 'Facebook' })
-            }}>
-            Login
-        </Button>
+                color="inherit"
+                //  className={classes.buttonLogin}
+                startIcon={<FacebookIcon />}
+                onClick={() => {
+                    //@ts-ignore
+                    Auth.federatedSignIn({ provider: 'Facebook' })
+                }}>
+                Login
+            </Button>
         )
 
 }

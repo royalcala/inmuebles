@@ -3,9 +3,20 @@ import { Auth, Hub } from 'aws-amplify';
 // import Login from './Login';
 import Portal from './Portal';
 
+type User =  {
+  attributes: {
+    email: string
+  }
+} | null
+type GlobalContextType = {
+  user:User
+}
+export const GlobalContext = React.createContext<GlobalContextType>({
+  user: null
+});
 
 function App() {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User>(null);
   function getUser() {
     return Auth.currentAuthenticatedUser()
       .then(userData => userData)
@@ -33,10 +44,16 @@ function App() {
 
 
   // if (user)
-    return <Portal />
+  return (
+    <GlobalContext.Provider value={{
+      user: user
+    }}>
+      <Portal />
+    </GlobalContext.Provider >
+  )
   // else
   //   return <Login />
-  // return (    
+  // return (
   //     <p>User: {user ? JSON.stringify(user.attributes) : 'None'}</p>
   //     {user ? (
   //       <button onClick={() => Auth.signOut()}>Sign Out</button>

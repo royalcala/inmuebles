@@ -4,6 +4,7 @@ import Drawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
 import MenuPublic from './MenuDrawerLeft.Public'
 import MenuCatalog from './MenuDrawerLeft.Catalog'
+import ListSubheader from '@mui/material/ListSubheader';
 
 type MenuContextType = {
   toggleDrawer: (open: boolean) => void
@@ -43,11 +44,11 @@ export default function MenuDrawerLeft({ drawer, setDrawer }: { drawer: boolean,
           sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
           component="nav"
           aria-labelledby="nested-list-subheader"
-        // subheader={
-        //   <ListSubheader component="div" id="nested-list-subheader">
-        //     Nested List Items
-        //   </ListSubheader>
-        // }
+          subheader={
+            <ListSubheader component="div" id="nested-list-subheader">
+              InmueblesYaa
+            </ListSubheader>
+          }
         >
           <MenuContext.Provider value={{
             toggleDrawer: (open: boolean) => {
