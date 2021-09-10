@@ -27,7 +27,7 @@ function LazyComponent({ Component }: any) {
         </div>
     );
 }
-//TODO warning each child in a list have a unique key
+//TODO warning each child in a list have a unique key. React.Children.toArray()
 export default function Routes() {
 
     return (
