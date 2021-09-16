@@ -11,7 +11,6 @@ import { GlobalContext } from '../App';
 
 export default function MenuSession() {
     const globalContext = React.useContext(GlobalContext)
-    console.log(globalContext.user)
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);

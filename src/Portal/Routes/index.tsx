@@ -38,7 +38,7 @@ export default function Routes() {
             <Route path="/catalogs/company/new" key={1}>
                 <LazyComponent Component={Catalog.company.new} />
             </Route>
-            <Route path="/catalogs/company/edit">
+            <Route path="/catalogs/company/edit/:id">
                 <LazyComponent Component={Catalog.company.edit} />
             </Route>
             <Route path="/catalogs/company/list">

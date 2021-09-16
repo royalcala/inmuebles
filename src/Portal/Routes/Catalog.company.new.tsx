@@ -1,16 +1,33 @@
 import React from 'react'
 import withContainer from './withContainer'
 import withLogin from './withLogin'
-import FormOne, { PropsFormOne } from '../../Components/Form.One'
+import { createCompany } from '../../graphql/mutations'
+import { API } from 'aws-amplify';
+import { CreateCompanyMutation } from '../../API'
+import { useHistory } from "react-router-dom";
+import FormEdit, { DataType } from '../../Components/Form.Edit'
+
 function New() {
-    const data: PropsFormOne = {
-       fields:[
-           {label:"Nombre Empresa",nameDB:"name"},
-       ] 
-    }
+    let history = useHistory();
     return (
-        <FormOne
-            data={{ ...data }}
+        <FormEdit
+            onFetch={async () => {
+                const data: DataType = {
+                    Detalles: {
+                        fields: [
+                            {
+                                label: "Nombre Empresa", name: "name", rules: { required: 'Nombre requerido' }
+                            },
+                        ]
+                    }
+                }
+                return data
+            }}
+            onSubmit={async (input: any) => {
+                const data = await API.graphql({ query: createCompany, variables: { input } }) as { data: CreateCompanyMutation }
+                console.log(data.data.createCompany)
+                history.push('/catalogs/company/edit/' + data.data.createCompany?.id)
+            }}
         />
     )
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import withContainer from './withContainer'
 function PublicList() {
     return (
-        <div>Hi</div>
+        <div>Public List Properties</div>
     )
 }
 
